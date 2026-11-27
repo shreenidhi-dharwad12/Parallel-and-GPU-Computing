@@ -1,4 +1,4 @@
-# EXP-05 — Thread Programming
+# EXP-02 — Thread Programming
 
 ## Pthreads and OpenMP Thread Programming
 
