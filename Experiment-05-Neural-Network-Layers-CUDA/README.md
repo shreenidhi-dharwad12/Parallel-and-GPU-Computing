@@ -1,6 +1,6 @@
 ﻿
 
-# Experiment 05 â€“ Neural Network Layers in CUDA
+# Experiment 05 - Neural Network Layers in CUDA
 
 
 
