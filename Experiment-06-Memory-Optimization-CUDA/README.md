@@ -45,13 +45,9 @@ When threads access scattered addresses, more memory transactions are required, 
 
 
 | Feature | Coalesced Access | Uncoalesced Access |
-
 |---|---|---|
-
 | Memory access | Neighbouring addresses | Scattered addresses |
-
 | Transactions | Fewer | More |
-
 | Bandwidth usage | More efficient | Less efficient |
 
 
@@ -151,13 +147,9 @@ In the naive CUDA kernel:
 
 
 | Measurement | Formula |
-
 |---|---|
-
 | Transpose bandwidth | `(2 x N x N x 4) / time` |
-
 | Matrix multiplication GFLOPS | `(2 x N x N x N) / time` |
-
 | Transpose speedup | `Uncoalesced time / Coalesced time` |
 
 
@@ -197,21 +189,13 @@ The program contains the following kernels and functions:
 
 
 | Component | Description |
-
 |---|---|
-
 | `transposeNaive()` | Performs uncoalesced matrix transpose |
-
 | `transposeCoalesced()` | Performs coalesced transpose using shared memory |
-
 | `matMulNaive()` | Performs naive matrix multiplication |
-
 | `timeTranspose()` | Measures transpose execution time |
-
 | `checkTranspose()` | Verifies transpose output |
-
 | `checkMatMul()` | Checks selected matrix multiplication results |
-
 | `main()` | Allocates memory, launches kernels and displays results |
 
 
@@ -221,22 +205,25 @@ The program contains the following kernels and functions:
 
 
 | Parameter | Default Value |
-
 |---|---:|
-
 | Transpose matrix size | 4096 x 4096 |
-
 | Matrix multiplication size | 1024 x 1024 |
-
 | Transpose tile size | 32 x 32 |
-
 | Matrix multiplication block size | 16 x 16 |
-
 | Transpose repetitions | 20 |
-
 | Matrix multiplication repetitions | 5 |
 
 
+
+### Folder Structure
+
+```text
+Experiment-06-Memory-Optimization-CUDA/
+|-- README.md
+|-- code/
+|   |-- exp6_cuda_memory.cu
+|-- screenshots/
+```
 
 ## 6. Procedure
 
@@ -403,13 +390,9 @@ Fill in this table using the actual results from the GPU execution.
 
 
 | Kernel | Matrix Size | Time (ms) | Bandwidth / GFLOPS | Result |
-
 |---|---:|---:|---:|---|
-
 | Uncoalesced transpose | 4096 | - | - | - |
-
 | Coalesced transpose | 4096 | - | - | - |
-
 | Naive matrix multiplication | 1024 | - | - | - |
 
 
@@ -487,23 +470,12 @@ This experiment demonstrates that memory access patterns have a major impact on 
 
 
 | Problem | Possible Solution |
-
 |---|---|
-
 | `nvcc` not found | Install CUDA Toolkit or configure the compiler path |
-
 | No CUDA device detected | Check the NVIDIA driver and GPU availability |
-
 | Compilation error | Verify CUDA syntax and compiler setup |
-
 | Result shows FAIL | Check kernel indexing and boundary conditions |
-
 | Very small speedup | Use larger matrix sizes |
-
 | Out of memory | Reduce the matrix sizes |
-
-
-
-
 
 
