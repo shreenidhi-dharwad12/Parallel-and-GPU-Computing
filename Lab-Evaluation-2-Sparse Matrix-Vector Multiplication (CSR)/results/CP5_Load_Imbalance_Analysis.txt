@@ -1,0 +1,43 @@
+# CP5 – Load Imbalance and Memory Access Analysis
+
+## 1. Aim
+To study load imbalance and memory access in Sparse Matrix-Vector Multiplication using CSR format.
+
+## 2. Load Imbalance
+Load imbalance occurs when different rows contain different numbers of non-zero elements.
+
+In our practical example:
+
+| Row | Non-zero elements |
+|---|---:|
+| Row 1 | 1 |
+| Row 2 | 5 |
+| Row 3 | 1 |
+| Row 4 | 3 |
+
+## 3. Scalar CSR
+- One thread processes one row.
+- Each thread processes its row elements sequentially.
+- Rows with more non-zero elements require more work.
+
+## 4. Vector CSR
+- One warp processes one row.
+- Multiple threads process elements of the same row.
+- Work is distributed among threads.
+
+## 5. Memory Access Analysis
+- Values array stores non-zero values.
+- Column index array stores column positions.
+- Row pointer array identifies row boundaries.
+- Input vector elements are accessed using column indices.
+
+## 6. Practical Output
+
+Scalar CSR Output: 10 55 60 44
+
+Vector CSR Output: 10 55 60 44
+
+Both implementations produced identical results.
+
+## 7. Conclusion
+CSR format efficiently stores sparse matrices. Scalar CSR assigns one thread per row, while Vector CSR assigns one warp per row. Different numbers of non-zero elements in rows can cause load imbalance.
