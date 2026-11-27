@@ -204,32 +204,14 @@ For the sample GPU:
 
 ## 5. Folder Structure
 
-
-
 ```text
-
 Experiment-07-Profiling-GPU-Utilization/
-
-â”‚
-
-â”œâ”€â”€ README.md
-
-â”‚
-
-â”œâ”€â”€ code/
-
-â”‚   â”œâ”€â”€ gpu_workload.py
-
-â”‚   â””â”€â”€ analyze_trace.py
-
-â”‚
-
-â””â”€â”€ screenshots/
-
+|-- README.md
+|-- code/
+|   |-- gpu_workload.py
+|   |-- analyze_trace.py
+|-- screenshots/
 ```
-
-
-
 ## 6. Program Details
 
 
@@ -492,23 +474,23 @@ For the GEMM operation:
 
 FLOPs = 2 x 16384 x 1024 x 1024
 
-&#x20;     = approximately 34.4 billion
+     = approximately 34.4 billion
 
 
 
 Bytes = (16384 x 1024 + 1024 x 1024
 
-&#x20;        + 16384 x 1024) x 4
+        + 16384 x 1024) x 4
 
 
 
-&#x20;     = approximately 138 MB
+     = approximately 138 MB
 
 
 
 Arithmetic Intensity = 34.4 billion / 138 million
 
-&#x20;                    = approximately 249 FLOP/byte
+                    = approximately 249 FLOP/byte
 
 ```
 
@@ -613,21 +595,13 @@ Open `trace_optimized.json` in Perfetto and observe the overlap between data tra
 
 
 | Metric | Baseline | Optimized |
-
 |---|---:|---:|
-
 | Total time | 4.76 s | 2.62 s |
-
 | Time per batch | 23.8 ms | 13.1 ms |
-
 | Throughput | 42 batches/s | 76 batches/s |
-
 | Average GPU utilization | 55% | 96% |
-
 | Kernel busy time / window | 52% | 94% |
-
 | Idle gaps above 50 us | 9 | 0 |
-
 | Copy and kernel overlap | 0 ms | Approximately 50 ms |
 
 
@@ -642,11 +616,11 @@ Speedup = Baseline Time / Optimized Time
 
 
 
-&#x20;       = 4.76 / 2.62
+       = 4.76 / 2.62
 
 
 
-&#x20;       = approximately 1.82x
+       = approximately 1.82x
 
 ```
 
@@ -657,17 +631,11 @@ Speedup = Baseline Time / Optimized Time
 
 
 | Kernel | Arithmetic Intensity | Classification |
-
 |---|---:|---|
-
 | GEMM | Approximately 249 FLOP/byte | Compute-bound |
-
 | ReLU | Approximately 0.125 FLOP/byte | Memory-bound |
-
 | Multiplication | Approximately 0.125 FLOP/byte | Memory-bound |
-
 | Addition | Approximately 0.125 FLOP/byte | Memory-bound |
-
 | Sum reduction | Approximately 0.25 FLOP/byte | Memory-bound |
 
 
@@ -685,23 +653,14 @@ Fill this table using the actual experiment results.
 
 
 | Metric | Baseline | Optimized |
-
 |---|---|---|
-
 | GPU model | | |
-
 | Total time (s) | | |
-
 | Time per batch (ms) | | |
-
 | Average GPU utilization (%) | | |
-
 | Kernel busy time (%) | | |
-
 | Idle gaps (count / ms) | | |
-
 | Copy and kernel overlap (ms) | | |
-
 | Checksum | | |
 
 
@@ -711,17 +670,11 @@ Fill this table using the actual experiment results.
 
 
 | Bottleneck | Optimization |
-
 |---|---|
-
 | Pageable host memory slows data transfer | Use pinned host memory |
-
 | Copy and computation run one after another | Use two CUDA streams |
-
 | A buffer may be reused too early | Use CUDA events and double buffering |
-
 | CPU waits for every result copy | Use asynchronous D2H transfer and synchronize at the end |
-
 | Element-wise kernels repeatedly access memory | Consider kernel fusion as a future improvement |
 
 
@@ -775,19 +728,12 @@ The experiment helped understand GPU utilization, arithmetic intensity, kernel c
 
 
 | Problem | Possible Solution |
-
 |---|---|
-
 | CUDA is unavailable | Check NVIDIA drivers and install CUDA-enabled PyTorch |
-
 | CUDA out of memory | Reduce batch rows using `--rows 8192` or `--rows 4096` |
-
 | No kernels found in trace | Update the driver and retry profiling |
-
 | Optimized mode is not faster | Check pinned memory, GPU load, and stream overlap |
-
 | Copies and kernels do not overlap | Check GPU concurrency support and profiler timeline |
-
 | Checksums differ significantly | Check the program logic and buffer synchronization |
 
 
@@ -803,7 +749,4 @@ The experiment helped understand GPU utilization, arithmetic intensity, kernel c
 - PyTorch Profiler: https://pytorch.org/docs/stable/profiler.html
 
 - Perfetto Trace Viewer: https://ui.perfetto.dev/
-
-
-
 
